@@ -17,8 +17,16 @@ $(document).ready(function () {
     });
 
     $('.ckeditor').each(function () {
-        CKEDITOR.replace($(this));
-    })
+        CKEDITOR.replace($(this).attr('id'), {
+            height: 300,
+
+            // Configure your file manager integration. This example uses CKFinder 3 for PHP.
+            filebrowserBrowseUrl: '/apps/ckfinder/3.4.5/ckfinder.html',
+            filebrowserImageBrowseUrl: '/apps/ckfinder/3.4.5/ckfinder.html?type=Images',
+            filebrowserUploadUrl: '/apps/ckfinder/3.4.5/core/connector/php/connector.php?command=QuickUpload&type=Files',
+            filebrowserImageUploadUrl: '/apps/ckfinder/3.4.5/core/connector/php/connector.php?command=QuickUpload&type=Images'
+        });
+    });
 
     $('.mass').click(function () {
         if ($(this).is(":checked")) {
