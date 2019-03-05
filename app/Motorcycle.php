@@ -25,10 +25,10 @@ class Motorcycle extends Model {
           'name',
           'brand',
           'seat_height',
-          'capacity',
           'weight',
+          'capacity',
           'performance',
-          'photo'
+          'description'
     ];
     
 

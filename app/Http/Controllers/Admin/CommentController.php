@@ -10,6 +10,7 @@ use App\Http\Requests\CreateCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Traits\FileUploadTrait;
+use App\Tours;
 
 
 class CommentController extends Controller {
@@ -23,7 +24,7 @@ class CommentController extends Controller {
 	 */
 	public function index(Request $request)
     {
-        $comment = Comment::all();
+        $comment = Comment::with("tours")->get();
 
 		return view('admin.comment.index', compact('comment'));
 	}
@@ -35,9 +36,10 @@ class CommentController extends Controller {
 	 */
 	public function create()
 	{
+	    $tours = Tours::pluck("id", "id")->prepend('Please select', 0);
+
 	    
-	    
-	    return view('admin.comment.create');
+	    return view('admin.comment.create', compact("tours"));
 	}
 
 	/**
@@ -62,9 +64,10 @@ class CommentController extends Controller {
 	public function edit($id)
 	{
 		$comment = Comment::find($id);
+	    $tours = Tours::pluck("id", "id")->prepend('Please select', 0);
+
 	    
-	    
-		return view('admin.comment.edit', compact('comment'));
+		return view('admin.comment.edit', compact('comment', "tours"));
 	}
 
 	/**

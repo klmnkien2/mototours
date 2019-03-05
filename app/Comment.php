@@ -23,9 +23,10 @@ class Comment extends Model {
     
     protected $fillable = [
           'name',
-          'photo',
           'year',
-          'description'
+          'description',
+          'photo',
+          'tours_id'
     ];
     
 
@@ -36,6 +37,12 @@ class Comment extends Model {
         Comment::observe(new UserActionsObserver);
     }
     
+    public function tours()
+    {
+        return $this->hasOne('App\Tours', 'id', 'tours_id');
+    }
+
+
     
     
     

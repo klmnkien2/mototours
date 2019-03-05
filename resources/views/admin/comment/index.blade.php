@@ -17,8 +17,9 @@
                             {!! Form::checkbox('delete_all',1,false,['class' => 'mass']) !!}
                         </th>
                         <th>Name</th>
-<th>Photo</th>
 <th>Years to make the trip</th>
+<th>Photo</th>
+<th>Tours</th>
 
                         <th>&nbsp;</th>
                     </tr>
@@ -31,8 +32,9 @@
                                 {!! Form::checkbox('del-'.$row->id,1,false,['class' => 'single','data-id'=> $row->id]) !!}
                             </td>
                             <td>{{ $row->name }}</td>
-<td>@if($row->photo != '')<img src="{{ asset('uploads/thumb') . '/'.  $row->photo }}">@endif</td>
 <td>{{ $row->year }}</td>
+<td>@if($row->photo != '')<img src="{{ asset('uploads/thumb') . '/'.  $row->photo }}">@endif</td>
+<td>{{ isset($row->tours->id) ? $row->tours->id : '' }}</td>
 
                             <td>
                                 {!! link_to_route(config('quickadmin.route').'.comment.edit', trans('quickadmin::templates.templates-view_index-edit'), array($row->id), array('class' => 'btn btn-xs btn-info')) !!}

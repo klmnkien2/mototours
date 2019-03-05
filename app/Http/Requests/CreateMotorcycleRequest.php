@@ -25,6 +25,7 @@ class CreateMotorcycleRequest extends FormRequest {
 	{
 		return [
             'name' => 'required|unique:motorcycle,name,'.$this->motorcycle, 
+            'brand' => 'required', 
             
 		];
 	}
