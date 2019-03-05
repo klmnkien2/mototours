@@ -12,3 +12,6 @@
 */
 
 Route::get('/', 'MainController@home')->name('main.home');
+Route::get('/tours', 'MainController@tourList')->name('main.tour_list');
+Route::get('/page', 'MainController@pageStatic')->name('main.page_static');
+Route::get('/destination', 'MainController@pageDestination')->name('main.page_destination');
