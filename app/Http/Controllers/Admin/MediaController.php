@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AjaxUploadRequest;
 use Redirect;
 use Schema;
 use App\Media;
@@ -112,6 +113,28 @@ class MediaController extends Controller {
         }
 
         return redirect()->route(config('quickadmin.route').'.media.index');
+    }
+
+    public function uploadFileAjax(AjaxUploadRequest $request)
+    {
+        if ($request->hasFile('upload')) {
+            try {
+                $request = $this->saveFiles($request);
+                return response()->json([
+                    'fileName' => $request->get('upload'),
+                    'uploaded' => 1,
+                    'url' => asset('uploads/' . $request->get('upload')),
+                ]);
+            } catch (\Exception $exception) {
+                return response()->json([
+                    'error' => ['number' => 1001, 'message' => trans('Internal Error:') . $exception->getMessage()]
+                ]);
+            }
+        } else {
+            return response()->json([
+                'error' => ['number' => 1000, 'message' => trans('no file selected')]
+            ]);
+        }
     }
 
 }

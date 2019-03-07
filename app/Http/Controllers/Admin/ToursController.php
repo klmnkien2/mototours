@@ -3,9 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Motorcycle;
+use App\Stages;
+use App\TourPrices;
 use Redirect;
 use Schema;
+use DB;
+use Illuminate\Support\Facades\Validator;
 use App\Tours;
+use App\Itinerary;
 use App\Http\Requests\CreateToursRequest;
 use App\Http\Requests\UpdateToursRequest;
 use Illuminate\Http\Request;
@@ -35,9 +41,14 @@ class ToursController extends Controller {
 	 */
 	public function create()
 	{
-	    
-	    
-	    return view('admin.tours.create');
+        $motorList = Motorcycle::all();
+        $priceForList = [
+            'room2ride2' => 'sharing room, riding 2 up',
+            'room2ride1' => 'sharing room, riding solo',
+            'room1ride1' => 'single room, riding solo',
+        ];
+
+	    return view('admin.tours.create', compact('motorList', 'priceForList'));
 	}
 
 	/**
@@ -47,8 +58,56 @@ class ToursController extends Controller {
 	 */
 	public function store(CreateToursRequest $request)
 	{
-	    
-		Tours::create($request->all());
+        $validation = Validator::make($request->all(), [
+            'name'  => 'required'
+        ]);
+        if ($validation->fails()) {
+            return redirect()->back()->withInput()->withErrors($validation);
+        }
+
+        DB::beginTransaction();
+        try {
+            $tours = Tours::create($request->except(['itinerary_title']));
+
+            foreach ($request->itinerary_title as $index => $field) {
+                $fields[$index] = [
+                    'tours_id' => $tours->id,
+                    'title' => $field,
+                    'description' => $request->itinerary_description[$index],
+                ];
+
+                Itinerary::create($fields[$index]);
+            }
+
+            foreach ($request->tour_price_motorcycle as $index => $field) {
+                $fields[$index] = [
+                    'tours_id' => $tours->id,
+                    'motorcycle_id' => $field,
+                    'type' => $request->tour_price_type[$index],
+                    'price' => $request->tour_price_price[$index],
+                ];
+
+                TourPrices::create($fields[$index]);
+            }
+
+            foreach ($request->stage_number as $index => $field) {
+                $fields[$index] = [
+                    'tours_id' => $tours->id,
+                    'number' => $field,
+                    'from_date' => $request->stage_from_date[$index],
+                    'to_date' => $request->stage_to_date[$index],
+                    'description' => $request->stage_description[$index],
+                ];
+
+                Stages::create($fields[$index]);
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            $request->session()->flash('error', 'Transaction could not be done!');
+            return redirect()->back()->withInput();
+        }
+
+        DB::commit();
 
 		return redirect()->route(config('quickadmin.route').'.tours.index');
 	}
