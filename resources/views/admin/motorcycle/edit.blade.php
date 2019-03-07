@@ -16,22 +16,22 @@
     </div>
 </div>
 
-{!! Form::model($motorcycle, array('class' => 'form-horizontal', 'id' => 'form-with-validation', 'method' => 'PATCH', 'route' => array(config('quickadmin.route').'.motorcycle.update', $motorcycle->id))) !!}
+{!! Form::model($motorcycle, array('files' => true, 'class' => 'form-horizontal', 'id' => 'form-with-validation', 'method' => 'PATCH', 'route' => array(config('quickadmin.route').'.motorcycle.update', $motorcycle->id))) !!}
 
 <div class="form-group">
-    {!! Form::label('name', 'Name*', array('class'=>'col-sm-2 control-label')) !!}
+    {!! Form::label('name', 'name*', array('class'=>'col-sm-2 control-label')) !!}
     <div class="col-sm-10">
         {!! Form::text('name', old('name',$motorcycle->name), array('class'=>'form-control')) !!}
         
     </div>
 </div><div class="form-group">
-    {!! Form::label('brand', 'Brand*', array('class'=>'col-sm-2 control-label')) !!}
+    {!! Form::label('brand', 'brand', array('class'=>'col-sm-2 control-label')) !!}
     <div class="col-sm-10">
         {!! Form::text('brand', old('brand',$motorcycle->brand), array('class'=>'form-control')) !!}
         
     </div>
 </div><div class="form-group">
-    {!! Form::label('seat_height', 'Seat height', array('class'=>'col-sm-2 control-label')) !!}
+    {!! Form::label('seat_height', 'seat_height', array('class'=>'col-sm-2 control-label')) !!}
     <div class="col-sm-10">
         {!! Form::text('seat_height', old('seat_height',$motorcycle->seat_height), array('class'=>'form-control')) !!}
         
@@ -43,15 +43,23 @@
         
     </div>
 </div><div class="form-group">
-    {!! Form::label('capacity', 'Capacity', array('class'=>'col-sm-2 control-label')) !!}
+    {!! Form::label('capacity', 'capacity', array('class'=>'col-sm-2 control-label')) !!}
     <div class="col-sm-10">
         {!! Form::text('capacity', old('capacity',$motorcycle->capacity), array('class'=>'form-control')) !!}
         
     </div>
 </div><div class="form-group">
-    {!! Form::label('performance', 'Performance', array('class'=>'col-sm-2 control-label')) !!}
+    {!! Form::label('performance', 'performance', array('class'=>'col-sm-2 control-label')) !!}
     <div class="col-sm-10">
         {!! Form::text('performance', old('performance',$motorcycle->performance), array('class'=>'form-control')) !!}
+        
+    </div>
+</div><div class="form-group">
+    {!! Form::label('photo', 'Photo', array('class'=>'col-sm-2 control-label')) !!}
+    <div class="col-sm-10">
+        {!! Form::file('photo') !!}
+        {!! Form::hidden('photo_w', 4096) !!}
+        {!! Form::hidden('photo_h', 4096) !!}
         
     </div>
 </div><div class="form-group">

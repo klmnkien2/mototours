@@ -28,6 +28,7 @@ class Motorcycle extends Model {
           'weight',
           'capacity',
           'performance',
+          'photo',
           'description'
     ];
     

@@ -17,11 +17,12 @@ class CreateMotorcycleTable extends Migration {
         Schema::create('motorcycle',function(Blueprint $table){
             $table->increments("id");
             $table->string("name");
-            $table->string("brand");
+            $table->string("brand")->nullable();
             $table->string("seat_height")->nullable();
             $table->string("weight")->nullable();
             $table->string("capacity")->nullable();
             $table->string("performance")->nullable();
+            $table->string("photo");
             $table->text("description")->nullable();
             $table->timestamps();
             $table->softDeletes();

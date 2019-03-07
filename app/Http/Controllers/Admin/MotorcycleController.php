@@ -9,7 +9,7 @@ use App\Motorcycle;
 use App\Http\Requests\CreateMotorcycleRequest;
 use App\Http\Requests\UpdateMotorcycleRequest;
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\Traits\FileUploadTrait;
 
 
 class MotorcycleController extends Controller {
@@ -47,7 +47,7 @@ class MotorcycleController extends Controller {
 	 */
 	public function store(CreateMotorcycleRequest $request)
 	{
-	    
+	    $request = $this->saveFiles($request);
 		Motorcycle::create($request->all());
 
 		return redirect()->route(config('quickadmin.route').'.motorcycle.index');
@@ -77,7 +77,7 @@ class MotorcycleController extends Controller {
 	{
 		$motorcycle = Motorcycle::findOrFail($id);
 
-        
+        $request = $this->saveFiles($request);
 
 		$motorcycle->update($request->all());
 

@@ -16,12 +16,13 @@
                         <th>
                             {!! Form::checkbox('delete_all',1,false,['class' => 'mass']) !!}
                         </th>
-                        <th>Name</th>
-<th>Brand</th>
-<th>Seat height</th>
+                        <th>name</th>
+<th>brand</th>
+<th>seat_height</th>
 <th>weight</th>
-<th>Capacity</th>
-<th>Performance</th>
+<th>capacity</th>
+<th>performance</th>
+<th>Photo</th>
 
                         <th>&nbsp;</th>
                     </tr>
@@ -39,6 +40,7 @@
 <td>{{ $row->weight }}</td>
 <td>{{ $row->capacity }}</td>
 <td>{{ $row->performance }}</td>
+<td>@if($row->photo != '')<img src="{{ asset('uploads/thumb') . '/'.  $row->photo }}">@endif</td>
 
                             <td>
                                 {!! link_to_route(config('quickadmin.route').'.motorcycle.edit', trans('quickadmin::templates.templates-view_index-edit'), array($row->id), array('class' => 'btn btn-xs btn-info')) !!}
