@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Pages;
 
 class MainController extends Controller
 {
@@ -16,9 +17,9 @@ class MainController extends Controller
         return view('main.tour_list');
     }
 
-    public function pageStatic()
+    public function pageStatic(Pages $pages)
     {
-        return view('main.page_static');
+        return view('main.page_static', compact('pages'));
     }
 
     public function pageDestination()

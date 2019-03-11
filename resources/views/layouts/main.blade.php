@@ -39,7 +39,12 @@
             @include('partials.main_slider')
             <div id="content">
                 <!-- // Start Content -->
-                @yield('content')
+                <div class="container-fluid">
+                    <div class="row">
+                        @yield('content')
+                        @include('partials.sidebar')
+                    </div>
+                </div>
                 <!-- // End Content -->
             </div>
         </div>

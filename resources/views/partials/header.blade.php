@@ -2,7 +2,7 @@
     <div id="site-header">
         <div class="container-fluid">
             <a class="menu-icon" href="#"><em class="fa fa-bars"></em> Menu</a>
-            <span class="logo"><a href="#"><img src="images/logo.png" alt=""></a></span>
+            <span class="logo"><a href="#"><img src="{{ asset('images/logo.png') }}" alt=""></a></span>
             <div class="clearfix extend">
                 <ul class="tours-on">
                     <li>Tours on:</li>
@@ -24,7 +24,7 @@
     </div>
     <nav id="site-menu">
         <div class="container-fluid">
-            <span class="logo"><a href="#"><img src="images/logo.png" alt=""></a></span>
+            <span class="logo"><a href="#"><img src="{{ asset('images/logo.png') }}" alt=""></a></span>
             <ul class="sm sm-mototours" id="main-menu">
                 <li><a href="#" class="current">Home</a></li>
                 <li>
