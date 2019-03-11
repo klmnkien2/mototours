@@ -20,8 +20,8 @@
         <!-- /Select for type -->
     </td>
     <td>
-        <input type="text" name="tour_price_price[]" value="{{ old('tour_price_price.'.$index) }}" class="form-control"
-               required="required" placeholder="{{ trans('Price') }}">
+        <input type="text" name="tour_price_price[]" value="{{ old('tour_price_price.'.$index) }}" class="form-control" pattern="^(\d)*$"
+               required="required" placeholder="{{ trans('Price, number only') }}">
     </td>
     <td><a href="#" class="rem btn btn-danger"><i class="fa fa-minus"></i></a></td>
 </tr>

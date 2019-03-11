@@ -6,6 +6,14 @@
     <div class="col-sm-10 col-sm-offset-2">
         <h1>{{ trans('quickadmin::templates.templates-view_create-add_new') }}</h1>
 
+        @if(Session::has('error'))
+            <div class="alert alert-danger">
+                <ul>
+                    <li class="error">{{ Session::get('error') }}</li>
+                </ul>
+            </div>
+        @endif
+
         @if ($errors->any())
         	<div class="alert alert-danger">
         	    <ul>
@@ -33,7 +41,7 @@
 </div><div class="form-group">
     {!! Form::label('description', 'Description', array('class'=>'col-sm-2 control-label')) !!}
     <div class="col-sm-10">
-        {!! Form::textarea('description', old('description'), array('class'=>'form-control')) !!}
+        {!! Form::textarea('description', old('description'), array('class'=>'form-control ckeditor')) !!}
         
     </div>
 </div><div class="form-group">
@@ -89,7 +97,7 @@
 <div class="form-group">
     {!! Form::label('itinerary', 'Itinerary', array('class'=>'col-sm-2 control-label')) !!}
     <div class="col-sm-10">
-        {!! Form::text('itinerary', old('itinerary'), array('class'=>'form-control')) !!}
+        {!! Form::textarea('itinerary', old('itinerary'), array('class'=>'form-control ckeditor')) !!}
         
     </div>
 </div>
@@ -123,7 +131,7 @@
 <div class="form-group">
     {!! Form::label('book_info', 'Book info', array('class'=>'col-sm-2 control-label')) !!}
     <div class="col-sm-10">
-        {!! Form::text('book_info', old('book_info'), array('class'=>'form-control')) !!}
+        {!! Form::textarea('book_info', old('book_info'), array('class'=>'form-control ckeditor')) !!}
         
     </div>
 </div>
@@ -136,7 +144,7 @@
     <tr>
         <td>Motorcycle</td>
         <td>Price for</td>
-        <td>Price</td>
+        <td>Price ($)</td>
     </tr>
     @if(old('tour_price_motorcycle'))
         @foreach(old('tour_price_motorcycle') as $index => $fieldName)
@@ -159,7 +167,7 @@
 <div class="form-group">
     {!! Form::label('price_info', 'Price info', array('class'=>'col-sm-2 control-label')) !!}
     <div class="col-sm-10">
-        {!! Form::text('price_info', old('price_info'), array('class'=>'form-control')) !!}
+        {!! Form::textarea('price_info', old('price_info'), array('class'=>'form-control ckeditor')) !!}
         
     </div>
 </div>

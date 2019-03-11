@@ -69,6 +69,7 @@ class ToursController extends Controller {
         try {
             $tours = Tours::create($request->except(['itinerary_title']));
 
+            $fields = [];
             foreach ($request->itinerary_title as $index => $field) {
                 $fields[$index] = [
                     'tours_id' => $tours->id,
@@ -79,6 +80,7 @@ class ToursController extends Controller {
                 Itinerary::create($fields[$index]);
             }
 
+            $fields = [];
             foreach ($request->tour_price_motorcycle as $index => $field) {
                 $fields[$index] = [
                     'tours_id' => $tours->id,
@@ -90,12 +92,13 @@ class ToursController extends Controller {
                 TourPrices::create($fields[$index]);
             }
 
+            $fields = [];
             foreach ($request->stage_number as $index => $field) {
                 $fields[$index] = [
                     'tours_id' => $tours->id,
                     'number' => $field,
-                    'from_date' => $request->stage_from_date[$index],
-                    'to_date' => $request->stage_to_date[$index],
+                    'from_date' => date('d/m/y', strtotime($request->stage_from_date[$index])),
+                    'to_date' => date('d/m/y', strtotime($request->stage_to_date[$index])),
                     'description' => $request->stage_description[$index],
                 ];
 
@@ -103,7 +106,7 @@ class ToursController extends Controller {
             }
         } catch (\Exception $e) {
             DB::rollback();
-            $request->session()->flash('error', 'Transaction could not be done!');
+            $request->session()->flash('error', 'Transaction could not be done! ' . $e->getMessage());
             return redirect()->back()->withInput();
         }
 

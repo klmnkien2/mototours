@@ -33,7 +33,7 @@
 </div><div class="form-group">
     {!! Form::label('description', 'Description', array('class'=>'col-sm-2 control-label')) !!}
     <div class="col-sm-10">
-        {!! Form::textarea('description', old('description',$tours->description), array('class'=>'form-control')) !!}
+        {!! Form::textarea('description', old('description',$tours->description), array('class'=>'form-control ckeditor')) !!}
         
     </div>
 </div><div class="form-group">
@@ -87,19 +87,19 @@
 </div><div class="form-group">
     {!! Form::label('itinerary', 'Itinerary', array('class'=>'col-sm-2 control-label')) !!}
     <div class="col-sm-10">
-        {!! Form::text('itinerary', old('itinerary',$tours->itinerary), array('class'=>'form-control')) !!}
+        {!! Form::textarea('itinerary', old('itinerary',$tours->itinerary), array('class'=>'form-control ckeditor')) !!}
         
     </div>
 </div><div class="form-group">
     {!! Form::label('book_info', 'Book info', array('class'=>'col-sm-2 control-label')) !!}
     <div class="col-sm-10">
-        {!! Form::text('book_info', old('book_info',$tours->book_info), array('class'=>'form-control')) !!}
+        {!! Form::textarea('book_info', old('book_info',$tours->book_info), array('class'=>'form-control ckeditor')) !!}
         
     </div>
 </div><div class="form-group">
     {!! Form::label('price_info', 'Price info', array('class'=>'col-sm-2 control-label')) !!}
     <div class="col-sm-10">
-        {!! Form::text('price_info', old('price_info',$tours->price_info), array('class'=>'form-control')) !!}
+        {!! Form::textarea('price_info', old('price_info',$tours->price_info), array('class'=>'form-control ckeditor')) !!}
         
     </div>
 </div>

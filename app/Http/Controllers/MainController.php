@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Stages;
+use App\Tours;
 use Illuminate\Http\Request;
 use App\Pages;
 
@@ -22,8 +24,11 @@ class MainController extends Controller
         return view('main.page_static', compact('pages'));
     }
 
-    public function pageDestination()
+    public function pageDestination(Tours $tours)
     {
-        return view('main.page_destination');
+        $stages = $tours->stages;
+        $itinerarys = $tours->itinerarys;
+        $tourPrices = $tours->tourPrices;
+        return view('main.page_destination', compact('tours', 'stages', 'itinerarys', 'tourPrices'));
     }
 }

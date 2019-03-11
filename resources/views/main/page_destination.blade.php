@@ -17,14 +17,10 @@
                         <div class="clearfix tab-content">
                             <div class="block welcome tour-highlights">
                                 <div class="block-title">
-                                    <h1 class="title">Advanture Vietnam Laos Cambodia</h1>
-                                    <div class="location"><em class="fa fa-map-marker"></em>Vietnam - Laos - Cambodia</div>
+                                    <h1 class="title">{{ $tours->name }}</h1>
+                                    <div class="location"><em class="fa fa-map-marker"></em>{{ $tours->location }}</div>
                                 </div>
-                                <div class="block-content">
-                                    <p>Gorgeous scenery, breathtaking nature, many historic and cultural sites, and stunning motorcycle roads are the aces up this tour’s sleeve. It starts in Chiang Mai and takes us through Laos into Vietnam, then loops back to Thailand.</p>
-                                    <p>As soon as we enter Vietnam you’ll notice that it still suffers from the ravages of the Vietnam War. Dien Bien Phu is where the most important battle of the First Indochina War took place. Around Sa Pa life goes on just as it did 100 years ago, it feels like traveling back in time. Breathtaking mountain roads take us to Nghia Lo and on to Hanoi, where we enjoy a rest day with an optional ride to Ha Long Bay.</p>
-                                    <p>Our journey then takes us back to the west, over mountains, through valleys and alongside endless rice fields. Back in Laos we enjoy two more days of fantastic riding before returning to Thailand, where this special adventure comes to an end, leaving lasting memories.</p>
-                                </div>
+                                <div class="block-content">{!! $tours['description'] !!}</div>
                             </div>
                         </div>
                         <div class="clearfix table-responsive">
@@ -36,36 +32,35 @@
                                 <tbody>
                                 <tr>
                                     <th scope="row">Start/Finish</th>
-                                    <td>Chiang Mai</td>
+                                    <td>{{ $tours['start_finish'] }}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Nearest Airport</th>
-                                    <td>Chiang Mai</td>
+                                    <td>{{ $tours['nearest_airport'] }}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Duration</th>
-                                    <td>16 days vacation, 14 riding days</td>
+                                    <td>{{ $tours['duration'] }}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Route</th>
-                                    <td>Total distance: 3049-3369 km, 1895-2093 miles
-                                        Daily distances: 136-349 km, 85-217 miles</td>
+                                    <td>{{ $tours['route'] }}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Accommodetions</th>
-                                    <td>Middle-class hotels.</td>
+                                    <td>{{ $tours['accommodation'] }}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Rest Day</th>
-                                    <td>Hanoi</td>
+                                    <td>{{ $tours['rest_day'] }}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Highlights</th>
-                                    <td><a href="#">Hanoi</a>, Minority Hill Tribes, <a href="#">Mai Chau Valley</a>, Northern Vietnam Mountains, <a href="#">Sa Pa</a>, <a href="#">Fansipan</a>, Battle Site of Dien Bien Phu, Nam Ou River, <a href="#">Luang Phabang</a>, Mekong River, Golden Triangle (Southeast Asia), Chiang Mai</td>
+                                    <td>{!! $tours['highlights'] !!}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Minium Number of Participants</th>
-                                    <td>8</td>
+                                    <td>{{ $tours['minimum_participant'] }}</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -74,9 +69,7 @@
                     <div class="le-tabs_content">
                         <div class="clearfix tab-content">
                             <div class="block welcome tour-highlights">
-                                <div class="block-content">
-                                    <p>The daily riding kilometres are approximate distances and may vary. The first and last days mentioned in the itinerary are the arrival and departure days; there is no riding on these days. Bear in mind the time difference between your country of origin and your travel destination. Arrival time should be arranged before 3 pm on the arrival day. Please book your flights accordingly. Route and overnight places may change due to unforeseen events.</p>
-                                </div>
+                                <div class="block-content">{!! $tours['itinerary'] !!}</div>
                             </div>
                         </div>
                         <div class="clearfix table-responsive">
@@ -86,38 +79,12 @@
                                     <col>
                                 </colgroup>
                                 <tbody>
+                                @foreach($itinerarys as $anItinerary)
                                 <tr>
-                                    <th scope="row">Day 1</th>
-                                    <td>Arrival in Klagenfurt</td>
+                                    <th scope="row">{{ $anItinerary['title'] }}</th>
+                                    <td>{{ $anItinerary['description'] }}</td>
                                 </tr>
-                                <tr>
-                                    <th scope="row">Day 2</th>
-                                    <td>Klagenfurt - Opatija</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Day 3</th>
-                                    <td>Opatija</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Day 4</th>
-                                    <td>Opatija - Plitvicka Jezera/Otocac</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Day 5</th>
-                                    <td>Plitvicka Jezera/Otocac</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Day 6</th>
-                                    <td>Plitvicka Jezera/Otocac - Otocec</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Day 7</th>
-                                    <td>Otocec - Klagenfurt</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Day 8</th>
-                                    <td>Departure from Klagenfurt</td>
-                                </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -125,9 +92,7 @@
                     <div class="le-tabs_content">
                         <div class="clearfix tab-content">
                             <div class="block welcome tour-highlights">
-                                <div class="block-content">
-                                    <p>Sed eleifend turpis vitae neque tempor eleifend. Morbi venenatis ligula et velit pretium tincidunt. Nulla facilisi. Aenean dignissim vestibulum arcu at egestas. Nulla facilisi. Praesent iaculis sollicitudin tristique. Donec aliquet elit eget lectus porta bibendum. Fusce sit amet neque nibh. Sed eleifend turpis vitae neque tempor eleifend. Morbi venenatis ligula et velit pretium tincidunt. Nulla facilisi. Aenean dignissim vestibulum arcu at egestas. Nulla facilisi. Praesent iaculis sollicitudin tristique. Donec aliquet elit eget lectus porta bibendum. Fusce sit amet neque nibh.</p>
-                                </div>
+                                <div class="block-content">{!! $tours['book_info'] !!}</div>
                             </div>
                         </div>
                         <div class="clearfix block table-responsive">
@@ -141,9 +106,9 @@
                                 <thead>
                                 <tr>
                                     <th></th>
-                                    <th><img style="height:40px;" src="images/207.png" alt="sharing room, riding 2 up"></th>
-                                    <th><img style="height:40px;" src="images/208.png" alt="sharing room, riding solo"></th>
-                                    <th><img style="height:40px;" src="images/209.png" alt="single room, riding solo"></th>
+                                    <th><img style="height:40px;" src="{{ asset('images/207.png') }}" alt="sharing room, riding 2 up"></th>
+                                    <th><img style="height:40px;" src="{{ asset('images/208.png') }}" alt="sharing room, riding solo"></th>
+                                    <th><img style="height:40px;" src="{{ asset('images/209.png') }}" alt="single room, riding solo"></th>
                                 </tr>
                                 <tr>
                                     <th>Tour price per person</th>
@@ -186,50 +151,28 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="clearfix tab-content">
-                            <p>Sed eleifend turpis vitae neque tempor eleifend. Morbi venenatis ligula et velit pretium tincidunt. Nulla facilisi. Aenean dignissim vestibulum arcu at egestas. Nulla facilisi. Praesent iaculis sollicitudin tristique. Donec aliquet elit eget lectus porta bibendum. Fusce sit amet neque nibh. Sed eleifend turpis vitae neque tempor eleifend. Morbi venenatis ligula et velit pretium tincidunt. Nulla facilisi. Aenean dignissim vestibulum arcu at egestas. Nulla facilisi. Praesent iaculis sollicitudin tristique. Donec aliquet elit eget lectus porta bibendum. Fusce sit amet neque nibh.</p>
-                        </div>
+                        <div class="clearfix tab-content">{!! $tours['price_info'] !!}</div>
                     </div>
                 </div>
             </div>
         </div>
         <ul class="clearfix stages">
+            @foreach($stages as $aStage)
             <li><div class="clearfix inner">
                     <div class="stage">
                         <div class="stage-body">
-                            <h4 class="step">Stage 1</h4>
-                            <h5 class="date">02/01 ~ 09/01</h5>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vestibulum pulvinar interdum.</p>
+                            <h4 class="step">Stage {{ $aStage['number'] }}</h4>
+                            <h5 class="date">{{ date_format(new DateTime('@' . strtotime($aStage['from_date'])), 'd/m') }} ~
+                                {{ date_format(new DateTime('@' . strtotime($aStage['to_date'])), 'd/m') }}</h5>
+                            {!! $aStage['description'] !!}
                         </div>
                         <div class="stage-foot">
                             <a class="btn" href="#">Request</a>
                         </div>
                     </div>
-                </div></li>
-            <li><div class="clearfix inner">
-                    <div class="stage">
-                        <div class="stage-body">
-                            <h4 class="step">Stage 2</h4>
-                            <h5 class="date">12/01 ~ 19/01</h5>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vestibulum pulvinar interdum.</p>
-                        </div>
-                        <div class="stage-foot">
-                            <a class="btn" href="#">Request</a>
-                        </div>
-                    </div>
-                </div></li>
-            <li><div class="clearfix inner">
-                    <div class="stage">
-                        <div class="stage-body">
-                            <h4 class="step">Stage 3</h4>
-                            <h5 class="date">22/01 ~ 29/01</h5>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vestibulum pulvinar interdum.</p>
-                        </div>
-                        <div class="stage-foot">
-                            <a class="btn" href="#">Request</a>
-                        </div>
-                    </div>
-                </div></li>
+                </div>
+            </li>
+            @endforeach
         </ul>
         <div class="comment-area">
             <div class="comment-write">

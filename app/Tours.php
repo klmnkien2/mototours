@@ -45,8 +45,19 @@ class Tours extends Model {
 
         Tours::observe(new UserActionsObserver);
     }
-    
-    
-    
-    
+
+    public function stages()
+    {
+        return $this->hasMany('App\Stages');
+    }
+
+    public function itinerarys()
+    {
+        return $this->hasMany('App\Itinerary');
+    }
+
+    public function tourPrices()
+    {
+        return $this->hasMany('App\TourPrices');
+    }
 }

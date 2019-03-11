@@ -22,12 +22,7 @@
 <th>Nearest Airport</th>
 <th>Duration</th>
 <th>Route</th>
-<th>Accommodations</th>
-<th>Rest day</th>
 <th>Minimum number of participants</th>
-<th>Itinerary</th>
-<th>Book info</th>
-<th>Price info</th>
 
                         <th>&nbsp;</th>
                     </tr>
@@ -45,12 +40,7 @@
 <td>{{ $row->nearest_airport }}</td>
 <td>{{ $row->duration }}</td>
 <td>{{ $row->route }}</td>
-<td>{{ $row->accommodation }}</td>
-<td>{{ $row->rest_day }}</td>
 <td>{{ $row->minimum_participant }}</td>
-<td>{{ $row->itinerary }}</td>
-<td>{{ $row->book_info }}</td>
-<td>{{ $row->price_info }}</td>
 
                             <td>
                                 {!! link_to_route(config('quickadmin.route').'.tours.edit', trans('quickadmin::templates.templates-view_index-edit'), array($row->id), array('class' => 'btn btn-xs btn-info')) !!}
