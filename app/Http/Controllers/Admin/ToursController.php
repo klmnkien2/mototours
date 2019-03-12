@@ -67,6 +67,7 @@ class ToursController extends Controller {
 
         DB::beginTransaction();
         try {
+            $request = $this->saveFiles($request);
             $tours = Tours::create($request->except(['itinerary_title']));
 
             $fields = [];
@@ -139,8 +140,8 @@ class ToursController extends Controller {
 	{
 		$tours = Tours::findOrFail($id);
 
-        
 
+        $request = $this->saveFiles($request);
 		$tours->update($request->all());
 
 		return redirect()->route(config('quickadmin.route').'.tours.index');

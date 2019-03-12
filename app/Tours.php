@@ -35,7 +35,8 @@ class Tours extends Model {
           'minimum_participant',
           'itinerary',
           'book_info',
-          'price_info'
+          'price_info',
+          'photo'
     ];
     
 
@@ -59,5 +60,10 @@ class Tours extends Model {
     public function tourPrices()
     {
         return $this->hasMany('App\TourPrices');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany('App\Comment');
     }
 }

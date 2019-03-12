@@ -13,7 +13,13 @@
 
 Route::post('/ajax/upload', 'Admin\MediaController@uploadFileAjax')->name('upload_file_ajax');
 
-Route::get('/', 'MainController@home')->name('main.home');
-Route::get('/tours', 'MainController@tourList')->name('main.tour_list');
-Route::get('/page/{pages}', 'MainController@pageStatic')->name('main.page_static');
-Route::get('/tour/{tours}', 'MainController@pageDestination')->name('main.page_destination');
+Route::group(['middleware' => ['web']], function () {
+    Route::get('/', 'MainController@home')->name('main.home');
+    Route::get('/tours', 'MainController@tourList')->name('main.tour_list');
+    Route::get('/page/{pages}', 'MainController@pageStatic')->name('main.page_static');
+    Route::get('/tour/{tours}', 'MainController@pageDestination')->name('main.page_destination');
+    Route::post('/comment', 'MainController@comment')->name('main.post_comment');
+    Route::get('/medias', 'MainController@medias')->name('main.medias');
+    Route::view('/contact', 'main.contact')->name('main.contact');
+});
+

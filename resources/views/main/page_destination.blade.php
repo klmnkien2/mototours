@@ -2,6 +2,21 @@
 
 @section('title') Homepage @endsection
 
+@section('custom_css')
+
+    <style>
+        #comment-message {
+            margin-top: 10px;
+        }
+
+        #comment-message .alert {
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+    </style>
+
+@endsection
+
 @section('content')
 
     <div class="col-xs-12 col-sm-8 col-md-8" id="main">
@@ -174,86 +189,7 @@
             </li>
             @endforeach
         </ul>
-        <div class="comment-area">
-            <div class="comment-write">
-                <div class="comment-toggle-button"><a class="btn"><em class="fa fa-plus"></em> Write your review about this tour</a></div>
-                <div class="comment-form">
-                    <form class="write-comment-form">
-                        <div class="form-group">
-                            <input type="file" class="file" id="user-photo" data-show-preview="false" data-placeholder="<span style='color:#999!important;'>Your Photo</span>">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Your Name">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Years to make the trip">
-                        </div>
-                        <div class="form-group">
-                            <textarea class="form-control" rows="2"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-write-comment">Submit</button>
-                    </form>
-                </div>
-            </div>
-            <div class="comment-list">
-                <div class="block tourfinder">
-                    <div class="block-title titlebar">
-                        <h3 class="title"><strong class="tit">What did they say?</strong><a class="link" href="#">Tripadvisor Review</a></h3>
-                    </div>
-                    <div class="block-content">
-                        <ul class="comments">
-                            <li class="comment">
-                                <div class="clearfix inner">
-                                    <div class="user-photo"><img class="photo" src="images/user-photo.png" alt="John Doe"></div>
-                                    <div class="user-info">
-                                        <div class="info-head"><strong class="user-name">John Doe</strong> - <span class="user-trip">Made this trip in 2015</span></div>
-                                        <div class="info-body"><p>adventure travel in Vietnam, Laos, Cambodia, Myanmar, India, Nepal, Bhutan, Sri Lankar... founded since 1996 from Hanoi, Vietnam. MotoTours Asia is an International Tour Operator licensed business</p></div>
-                                    </div>
-                                    <!--ul class="replies">
-                                        <li class="comment">
-                                            <div class="clearfix inner">
-                                                <div class="user-photo"><img class="photo" src="images/user-photo.png" alt="John Doe"></div>
-                                                <div class="user-info">
-                                                    <div class="info-head"><strong class="user-name">John Doe</strong> - <span class="user-trip">Made this trip in 2015</span></div>
-                                                    <div class="info-body"><p>adventure travel in Vietnam, Laos, Cambodia, Myanmar, India, Nepal, Bhutan, Sri Lankar... founded since 1996 from Hanoi, Vietnam. MotoTours Asia is an International Tour Operator licensed business</p></div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="comment">
-                                            <div class="clearfix inner">
-                                                <div class="user-photo"><img class="photo" src="images/user-photo.png" alt="John Doe"></div>
-                                                <div class="user-info">
-                                                    <div class="info-head"><strong class="user-name">John Doe</strong> - <span class="user-trip">Made this trip in 2015</span></div>
-                                                    <div class="info-body"><p>adventure travel in Vietnam, Laos, Cambodia, Myanmar, India, Nepal, Bhutan, Sri Lankar... founded since 1996 from Hanoi, Vietnam. MotoTours Asia is an International Tour Operator licensed business</p></div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul-->
-                                </div>
-                            </li>
-                            <li class="comment">
-                                <div class="clearfix inner">
-                                    <div class="user-photo"><img class="photo" src="images/user-photo.png" alt="John Doe"></div>
-                                    <div class="user-info">
-                                        <div class="info-head"><strong class="user-name">John Doe</strong> - <span class="user-trip">Made this trip in 2015</span></div>
-                                        <div class="info-body"><p>adventure travel in Vietnam, Laos, Cambodia, Myanmar, India, Nepal, Bhutan, Sri Lankar... founded since 1996 from Hanoi, Vietnam. MotoTours Asia is an International Tour Operator licensed business</p></div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="comment">
-                                <div class="clearfix inner">
-                                    <div class="user-photo"><img class="photo" src="images/user-photo.png" alt="John Doe"></div>
-                                    <div class="user-info">
-                                        <div class="info-head"><strong class="user-name">John Doe</strong> - <span class="user-trip">Made this trip in 2015</span></div>
-                                        <div class="info-body"><p>adventure travel in Vietnam, Laos, Cambodia, Myanmar, India, Nepal, Bhutan, Sri Lankar... founded since 1996 from Hanoi, Vietnam. MotoTours Asia is an International Tour Operator licensed business</p></div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @include('main.comment_form')
     </div>
 
 @endsection
