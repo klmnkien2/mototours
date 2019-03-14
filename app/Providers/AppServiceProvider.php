@@ -23,6 +23,9 @@ class AppServiceProvider extends ServiceProvider
 
         $motorcycleBrands = config('category.motorcycle_branch');
         View::share('motorcycleBrands', $motorcycleBrands);
+
+        $adventureLevels = config('category.tour_adventure_level');
+        View::share('adventureLevels', $adventureLevels);
     }
 
     /**

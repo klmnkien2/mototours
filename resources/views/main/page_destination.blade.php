@@ -133,36 +133,17 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @foreach($tourPrices as $aTourPrice)
                                 <tr>
                                     <td>
-                                        <a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="" data-content="Seat height: 790 mm<br/>Weight: 216 kg<br/>Capacity: 745 ccm<br/>Performance: 40 kW / 55 PS<br/><img src=http://www.edelweissbike.com/content/8d8818/96a3be/d72d18/3b166d6652340f56027559c03306b808_[200x0].jpg />" data-original-title="Honda NC 750 S ">Honda NC 750 S </a><br>
-                                        <a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="" data-content="Seat height: 830 mm<br/>Weight: 219 kg<br/>Capacity: 745 ccm<br/>Performance: 40 kW / 55 PS<br/><img src=http://www.edelweissbike.com/content/8d8818/96a3be/d72d18/eb5adbc2f4affe9e2d27eb8fd138305f_[200x0].jpg />" data-original-title="Honda NC 750 X">Honda NC 750 X</a><br>
-                                        <a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="" data-content="Seat height: 820 mm<br/>Weight: 215 kg<br/>Capacity: 645 ccm<br/>Performance: 49 kW / 67 PS<br/><img src=http://www.edelweissbike.com/content/8d8818/96a3be/d72d18/4e910d56d26cb044ff0de48ef8d490ae_[200x0].jpg />" data-original-title="Suzuki V-Strom 650">Suzuki V-Strom 650</a>
+                                        <a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="" data-content="Seat height: {{  $aTourPrice['motor']['seat_height'] }}<br/>Weight: {{  $aTourPrice['motor']['weight'] }}<br/>Capacity: {{  $aTourPrice['motor']['capacity'] }}<br/>Performance: {{  $aTourPrice['motor']['performance'] }}<br/><img src={{  asset('uploads/' . $aTourPrice['motor']['photo']) }} />" data-original-title="{{ $aTourPrice['motor']['name'] }}">{{ $aTourPrice['motor']['name'] }}</a>
                                     </td>
-                                    <td>$ 2.660</td>
-                                    <td>$ 2.930</td>
-                                    <td>$ 3.160</td>
+                                    <td>$ {{  $aTourPrice['room2ride2'] }}</td>
+                                    <td>$ {{  $aTourPrice['room2ride1'] }}</td>
+                                    <td>$ {{  $aTourPrice['room1ride1'] }}</td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="" data-content="Seat height: 790 mm<br/>Weight: 216 kg<br/>Capacity: 745 ccm<br/>Performance: 40 kW / 55 PS<br/><img src=http://www.edelweissbike.com/content/8d8818/96a3be/d72d18/3b166d6652340f56027559c03306b808_[200x0].jpg />" data-original-title="Honda NC 750 S ">Honda NC 750 S </a><br>
-                                        <a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="" data-content="Seat height: 830 mm<br/>Weight: 219 kg<br/>Capacity: 745 ccm<br/>Performance: 40 kW / 55 PS<br/><img src=http://www.edelweissbike.com/content/8d8818/96a3be/d72d18/eb5adbc2f4affe9e2d27eb8fd138305f_[200x0].jpg />" data-original-title="Honda NC 750 X">Honda NC 750 X</a><br>
-                                        <a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="" data-content="Seat height: 820 mm<br/>Weight: 215 kg<br/>Capacity: 645 ccm<br/>Performance: 49 kW / 67 PS<br/><img src=http://www.edelweissbike.com/content/8d8818/96a3be/d72d18/4e910d56d26cb044ff0de48ef8d490ae_[200x0].jpg />" data-original-title="Suzuki V-Strom 650">Suzuki V-Strom 650</a>
-                                    </td>
-                                    <td>$ 2.660</td>
-                                    <td>$ 2.930</td>
-                                    <td>$ 3.160</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="" data-content="Seat height: 790 mm<br/>Weight: 216 kg<br/>Capacity: 745 ccm<br/>Performance: 40 kW / 55 PS<br/><img src=http://www.edelweissbike.com/content/8d8818/96a3be/d72d18/3b166d6652340f56027559c03306b808_[200x0].jpg />" data-original-title="Honda NC 750 S ">Honda NC 750 S </a><br>
-                                        <a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="" data-content="Seat height: 830 mm<br/>Weight: 219 kg<br/>Capacity: 745 ccm<br/>Performance: 40 kW / 55 PS<br/><img src=http://www.edelweissbike.com/content/8d8818/96a3be/d72d18/eb5adbc2f4affe9e2d27eb8fd138305f_[200x0].jpg />" data-original-title="Honda NC 750 X">Honda NC 750 X</a><br>
-                                        <a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="" data-content="Seat height: 820 mm<br/>Weight: 215 kg<br/>Capacity: 645 ccm<br/>Performance: 49 kW / 67 PS<br/><img src=http://www.edelweissbike.com/content/8d8818/96a3be/d72d18/4e910d56d26cb044ff0de48ef8d490ae_[200x0].jpg />" data-original-title="Suzuki V-Strom 650">Suzuki V-Strom 650</a>
-                                    </td>
-                                    <td>$ 2.660</td>
-                                    <td>$ 2.930</td>
-                                    <td>$ 3.160</td>
-                                </tr>
+                                @endforeach
+
                                 </tbody>
                             </table>
                         </div>

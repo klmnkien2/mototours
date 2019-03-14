@@ -141,18 +141,30 @@ class ToursController extends Controller {
 	public function edit($id)
 	{
 		$tours = Tours::find($id);
-        $destinationList = Destination::all();
-//        /$tourDestinationList = TourDestination::where('tours_id', '=', $id);
-        $adventureLevels = config('category.tour_adventure_level');
+		$allTourDestination = TourDestination::where('tours_id', '=', $id)->get();
+		$allTourItinerary = Itinerary::where('tours_id', '=', $id)->get();
+		$allTourStages = Stages::where('tours_id', '=', $id)->get();
+		$allTourPrices = TourPrices::where('tours_id', '=', $id)->get();
+
+		// list for global using
         $motorList = Motorcycle::all();
         $priceForList = [
             'room2ride2' => 'sharing room, riding 2 up',
             'room2ride1' => 'sharing room, riding solo',
             'room1ride1' => 'single room, riding solo',
         ];
-	    
-	    
-		return view('admin.tours.edit', compact('tours', 'destinationList', 'adventureLevels', 'motorList', 'priceForList'));
+        $isUpdate = true;
+
+        return view('admin.tours.edit', compact(
+            'tours',
+            'allTourDestination',
+            'allTourItinerary',
+            'allTourStages',
+            'allTourPrices',
+            'isUpdate',
+            'motorList',
+            'priceForList'
+        ));
 	}
 
 	/**
@@ -179,7 +191,12 @@ class ToursController extends Controller {
                     'description' => $request->itinerary_description[$index],
                 ];
 
-                Itinerary::create($fields[$index]);
+                if (empty($request->itinerary_id[$index])) {
+                    Itinerary::create($fields[$index]);
+                } else {
+                    $record = Itinerary::findOrFail($request->itinerary_id[$index]);
+                    $record->update($fields[$index]);
+                }
             }
 
             $fields = [];
@@ -191,7 +208,12 @@ class ToursController extends Controller {
                     'price' => $request->tour_price_price[$index],
                 ];
 
-                TourPrices::create($fields[$index]);
+                if (empty($request->tour_price_id[$index])) {
+                    TourPrices::create($fields[$index]);
+                } else {
+                    $record = TourPrices::findOrFail($request->tour_price_id[$index]);
+                    $record->update($fields[$index]);
+                }
             }
 
             $fields = [];
@@ -199,12 +221,17 @@ class ToursController extends Controller {
                 $fields[$index] = [
                     'tours_id' => $tours->id,
                     'number' => $field,
-                    'from_date' => date('d/m/y', strtotime($request->stage_from_date[$index])),
-                    'to_date' => date('d/m/y', strtotime($request->stage_to_date[$index])),
+                    'from_date' => new \DateTime('@' . strtotime($request->stage_from_date[$index])),
+                    'to_date' => new \DateTime('@' . strtotime($request->stage_to_date[$index])),
                     'description' => $request->stage_description[$index],
                 ];
 
-                Stages::create($fields[$index]);
+                if (empty($request->stage_id[$index])) {
+                    Stages::create($fields[$index]);
+                } else {
+                    $record = Stages::findOrFail($request->stage_id[$index]);
+                    $record->update($fields[$index]);
+                }
             }
 
             $fields = [];
@@ -215,7 +242,12 @@ class ToursController extends Controller {
                     'sort' => $request->tour_destination_id[$index],
                 ];
 
-                TourDestination::create($fields[$index]);
+                if (empty($request->tour_destination_rowid[$index])) {
+                    TourDestination::create($fields[$index]);
+                } else {
+                    $record = TourDestination::findOrFail($request->tour_destination_rowid[$index]);
+                    $record->update($fields[$index]);
+                }
             }
         } catch (\Exception $e) {
             DB::rollback();

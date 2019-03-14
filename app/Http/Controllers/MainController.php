@@ -7,6 +7,7 @@ use App\Contact;
 use App\Destination;
 use App\Http\Requests\AddCommentRequest;
 use App\Media;
+use App\Motorcycle;
 use App\Newsletter;
 use DB;
 use App\Tours;
@@ -70,7 +71,20 @@ class MainController extends Controller
     {
         $stages = $tours->stages;
         $itinerarys = $tours->itinerarys;
-        $tourPrices = $tours->tourPrices;
+        $allTourPrices = $tours->tourPrices;
+        $tourPrices = [];
+        foreach ($allTourPrices as $aPrice) {
+            if (!isset($tourPrices[$aPrice->motorcycle_id])) {
+                $motorcycleEntity = Motorcycle::findOrFail($aPrice->motorcycle_id);
+                $tourPrices[$aPrice->motorcycle_id] = [
+                    'motor' => $motorcycleEntity,
+                    $aPrice->type => $aPrice->price
+                ];
+            } else {
+                $tourPrices[$aPrice->motorcycle_id][$aPrice->type] = $aPrice->price;
+            }
+        }
+
         $allComments = $tours->comments;
         return view('main.page_destination', compact('tours', 'stages', 'itinerarys', 'tourPrices', 'allComments'));
     }

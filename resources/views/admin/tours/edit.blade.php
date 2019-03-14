@@ -51,8 +51,8 @@
         <td>Destination</td>
         <td>Sort</td>
     </tr>
-    @if(old('tour_destination_id'))
-        @foreach(old('tour_destination_id') as $index => $fieldName)
+    @if(!$allTourDestination->isEmpty())
+        @foreach($allTourDestination as $index => $aTourDestination)
             @include('admin.tours.templates.tour_destination_line', ['index' => $index])
         @endforeach
     @else
@@ -156,8 +156,8 @@
         <td>Title</td>
         <td>Description</td>
     </tr>
-    @if(old('itinerary_title'))
-        @foreach(old('itinerary_title') as $index => $fieldName)
+    @if(! $allTourItinerary->isEmpty())
+        @foreach($allTourItinerary as $index => $aItinerary)
             @include('admin.tours.templates.itinerary_line', ['index' => $index])
         @endforeach
     @else
@@ -192,8 +192,8 @@
         <td>Price for</td>
         <td>Price ($)</td>
     </tr>
-    @if(old('tour_price_motorcycle'))
-        @foreach(old('tour_price_motorcycle') as $index => $fieldName)
+    @if(! $allTourPrices->isEmpty())
+        @foreach($allTourPrices as $index => $aTourPrice)
             @include('admin.tours.templates.tour_price_line', ['index' => $index])
         @endforeach
     @else
@@ -229,8 +229,8 @@
         <td>From Date</td>
         <td>To Date</td>
     </tr>
-    @if(old('stage_number'))
-        @foreach(old('stage_number') as $index => $fieldName)
+    @if(! $allTourStages->isEmpty())
+        @foreach($allTourStages as $index => $aStage)
             @include('admin.tours.templates.stage_line', ['index' => $index])
         @endforeach
     @else
