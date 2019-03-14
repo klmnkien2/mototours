@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Destination;
 use App\Http\Controllers\Controller;
 use App\Motorcycle;
 use App\Stages;
+use App\TourDestination;
 use App\TourPrices;
 use Redirect;
 use Schema;
@@ -47,8 +49,10 @@ class ToursController extends Controller {
             'room2ride1' => 'sharing room, riding solo',
             'room1ride1' => 'single room, riding solo',
         ];
+        //$destinationList = Destination::all();
+        $adventureLevels = config('category.tour_adventure_level');
 
-	    return view('admin.tours.create', compact('motorList', 'priceForList'));
+	    return view('admin.tours.create', compact('destinationList', 'adventureLevels', 'motorList', 'priceForList'));
 	}
 
 	/**
@@ -105,6 +109,18 @@ class ToursController extends Controller {
 
                 Stages::create($fields[$index]);
             }
+
+            $fields = [];
+            foreach ($request->tour_destination_id as $index => $field) {
+                $fields[$index] = [
+                    'tours_id' => $tours->id,
+                    'destination_id' => $field,
+                    'sort' => $request->tour_destination_id[$index],
+                ];
+
+                TourDestination::create($fields[$index]);
+            }
+
         } catch (\Exception $e) {
             DB::rollback();
             $request->session()->flash('error', 'Transaction could not be done! ' . $e->getMessage());
@@ -125,9 +141,18 @@ class ToursController extends Controller {
 	public function edit($id)
 	{
 		$tours = Tours::find($id);
+        $destinationList = Destination::all();
+//        /$tourDestinationList = TourDestination::where('tours_id', '=', $id);
+        $adventureLevels = config('category.tour_adventure_level');
+        $motorList = Motorcycle::all();
+        $priceForList = [
+            'room2ride2' => 'sharing room, riding 2 up',
+            'room2ride1' => 'sharing room, riding solo',
+            'room1ride1' => 'single room, riding solo',
+        ];
 	    
 	    
-		return view('admin.tours.edit', compact('tours'));
+		return view('admin.tours.edit', compact('tours', 'destinationList', 'adventureLevels', 'motorList', 'priceForList'));
 	}
 
 	/**
@@ -140,9 +165,65 @@ class ToursController extends Controller {
 	{
 		$tours = Tours::findOrFail($id);
 
+        DB::beginTransaction();
+        try {
 
-        $request = $this->saveFiles($request);
-		$tours->update($request->all());
+            $request = $this->saveFiles($request);
+            $tours->update($request->all());
+
+            $fields = [];
+            foreach ($request->itinerary_title as $index => $field) {
+                $fields[$index] = [
+                    'tours_id' => $tours->id,
+                    'title' => $field,
+                    'description' => $request->itinerary_description[$index],
+                ];
+
+                Itinerary::create($fields[$index]);
+            }
+
+            $fields = [];
+            foreach ($request->tour_price_motorcycle as $index => $field) {
+                $fields[$index] = [
+                    'tours_id' => $tours->id,
+                    'motorcycle_id' => $field,
+                    'type' => $request->tour_price_type[$index],
+                    'price' => $request->tour_price_price[$index],
+                ];
+
+                TourPrices::create($fields[$index]);
+            }
+
+            $fields = [];
+            foreach ($request->stage_number as $index => $field) {
+                $fields[$index] = [
+                    'tours_id' => $tours->id,
+                    'number' => $field,
+                    'from_date' => date('d/m/y', strtotime($request->stage_from_date[$index])),
+                    'to_date' => date('d/m/y', strtotime($request->stage_to_date[$index])),
+                    'description' => $request->stage_description[$index],
+                ];
+
+                Stages::create($fields[$index]);
+            }
+
+            $fields = [];
+            foreach ($request->tour_destination_id as $index => $field) {
+                $fields[$index] = [
+                    'tours_id' => $tours->id,
+                    'destination_id' => $field,
+                    'sort' => $request->tour_destination_id[$index],
+                ];
+
+                TourDestination::create($fields[$index]);
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            $request->session()->flash('error', 'Transaction could not be done! ' . $e->getMessage());
+            return redirect()->back()->withInput();
+        }
+
+        DB::commit();
 
 		return redirect()->route(config('quickadmin.route').'.tours.index');
 	}

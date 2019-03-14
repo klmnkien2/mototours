@@ -6,10 +6,9 @@
             <div class="clearfix extend">
                 <ul class="tours-on">
                     <li>Tours on:</li>
-                    <li><a href="#">BMW</a></li>
-                    <li><a href="#">Ducati</a></li>
-                    <li><a href="#">Harley Davidson</a></li>
-                    <li><a href="#">Triumph</a></li>
+                    @foreach($motorcycleBrands as $key => $value)
+                    <li><a href="{{route('main.tour_list', ['motor' => $key])}}">{{ $value }}</a></li>
+                    @endforeach
                 </ul>
                 <div class="chose-language">
                     <select class="form-control languages">
@@ -41,16 +40,9 @@
                 <li>
                     <a href="#">Tours</a>
                     <ul>
-                        <li><a href="#"><span>Asia overland tours</span></a></li>
-                        <li><a href="#"><span>Vietnam tours</span></a></li>
-                        <li><a href="#"><span>Laos tours</span></a></li>
-                        <li><a href="#"><span>Cambodia tours</span></a></li>
-                        <li><a href="#"><span>Myanmar tours</span></a></li>
-                        <li><a href="#"><span>India tours</span></a></li>
-                        <li><a href="#"><span>Nepal tours</span></a></li>
-                        <li><a href="#"><span>Nepal tours</span></a></li>
-                        <li><a href="#"><span>Bhutan tours</span></a></li>
-                        <li><a href="#"><span>Sri Lanka tours</span></a></li>
+                        @foreach($destinationList as $aDestination)
+                        <li><a href="{{route('main.tour_list', ['des' => $aDestination->id])}}"><span>{{$aDestination->name}} tours</span></a></li>
+                        @endforeach
                     </ul>
                 </li>
                 <li>

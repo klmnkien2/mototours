@@ -36,6 +36,7 @@ class Tours extends Model {
           'itinerary',
           'book_info',
           'price_info',
+          'adventure_level',
           'photo'
     ];
     
@@ -65,5 +66,10 @@ class Tours extends Model {
     public function comments()
     {
         return $this->hasMany('App\Comment');
+    }
+
+    public function tourDestination()
+    {
+        return $this->hasMany('App\TourDestination');
     }
 }

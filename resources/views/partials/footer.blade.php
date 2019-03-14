@@ -1,17 +1,30 @@
 <footer id="main-footer">
-    <div class="newsletter">
+    <div class="newsletter" id="newsletter-area">
         <div class="container-fluid">
             <div class="clearfix titlebar">
                 <h2>Newsletter Sign Up</h2>
                 <p>Sign up and get latest updates, news and best deals!</p>
             </div>
-            <div class="form-inline newsletter-form">
-                <div class="form-group">
-                    <span class="form-field yourName"><input type="text" class="form-control input-lg" placeholder="Your Name" /></span>
-                    <span class="form-field yourEmail"><input type="email" class="form-control input-lg" placeholder="Your Email" /></span>
+            <form action="{{ route('main.newsletter') }}" method="POST" class="form-inline newsletter-form">
+                <div class="newsletter-message">
+                    @if(Session::has('error-newsletter'))
+                        <div style="margin-bottom: 10px; color: #a94442;">
+                            {{ Session::get('error-newsletter') }}
+                        </div>
+                    @endif
+                    @if(Session::has('success-newsletter'))
+                        <div style="margin-bottom: 10px; color: #3c763d;">
+                            {{ Session::get('success-newsletter') }}
+                        </div>
+                    @endif
                 </div>
-                <button class="btn btn-primary btn-lg"><span><em class="fa fa-arrow-circle-o-right"></em></span></button>
-            </div>
+                @csrf
+                <div class="form-group">
+                    <span class="form-field yourName"><input type="text" name="name" class="form-control input-lg" placeholder="Your Name" /></span>
+                    <span class="form-field yourEmail"><input type="email" name="email" class="form-control input-lg" placeholder="Your Email" /></span>
+                </div>
+                <button class="btn btn-primary btn-lg" type="submit"><span><em class="fa fa-arrow-circle-o-right"></em></span></button>
+            </form>
         </div>
     </div>
     <div class="footer-widgets">

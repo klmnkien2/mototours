@@ -41,15 +41,8 @@
                             </div>
                         </div>
                     @endif
-                    @if ($errors->any())
-                        <div id="comment-message" class="comment-error">
-                            <div class="alert alert-danger">
-                                {!! implode('', $errors->all('<div class="error">:message</div>')) !!}
-                            </div>
-                        </div>
-                    @endif
                     <div class="comment-form" style="display: block;">
-                        <form class="write-comment-form" method="POST" action="{{ route('main.post_comment') }}">
+                        <form class="write-comment-form" method="POST" action="{{ route('main.contact_submit') }}">
                             @csrf
                             <div class="form-group">
                                 <input type="text" class="form-control" name="name" placeholder="Your Name">

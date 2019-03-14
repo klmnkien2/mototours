@@ -40,7 +40,48 @@
         {!! Form::hidden('photo_h', 4096) !!}
 
     </div>
-</div><div class="form-group">
+</div>
+
+<hr/>
+<h3>{{ trans('Add Destination') }}</h3>
+
+<table class="table">
+    <tbody id="generatorTourDestination">
+    <tr>
+        <td>Destination</td>
+        <td>Sort</td>
+    </tr>
+    @if(old('tour_destination_id'))
+        @foreach(old('tour_destination_id') as $index => $fieldName)
+            @include('admin.tours.templates.tour_destination_line', ['index' => $index])
+        @endforeach
+    @else
+        @include('admin.tours.templates.tour_destination_line', ['index' => ''])
+    @endif
+    </tbody>
+</table>
+
+<div class="form-group">
+    <div class="col-md-12">
+        <button type="button" data-generator-id="#generatorTourDestination" data-line-id="#lineTourDestination" class="addInputRow btn btn-success"><i class="fa fa-plus"></i> {{ trans('Add destination') }} </button>
+    </div>
+</div>
+
+<hr/>
+
+<div class="form-group">
+    {!! Form::label('adventure_level', 'Adventure level', array('class'=>'col-sm-2 control-label')) !!}
+    <div class="col-sm-10">
+        <select name="adventure_level" class="form-control">
+            <option value="">{{ trans('--Select one--') }}</option>
+            @foreach($adventureLevels as $key => $option)
+                <option value="{{ $key }}" @if($key == old('adventure_level')) selected @endif>{{ $option }}</option>
+            @endforeach
+        </select>
+    </div>
+</div>
+
+<div class="form-group">
     {!! Form::label('location', 'Location', array('class'=>'col-sm-2 control-label')) !!}
     <div class="col-sm-10">
         {!! Form::text('location', old('location'), array('class'=>'form-control')) !!}
@@ -233,6 +274,12 @@
     <table>
         <tbody id="lineTourPrice">
         @include('admin.tours.templates.tour_price_line', ['index' => ''])
+        </tbody>
+    </table>
+
+    <table>
+        <tbody id="lineTourDestination">
+        @include('admin.tours.templates.tour_destination_line', ['index' => ''])
         </tbody>
     </table>
 </div>

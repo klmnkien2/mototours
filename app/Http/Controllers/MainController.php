@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
+use App\Contact;
+use App\Destination;
 use App\Http\Requests\AddCommentRequest;
 use App\Media;
+use App\Newsletter;
 use DB;
 use App\Tours;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 use App\Pages;
 use Session;
@@ -26,10 +30,35 @@ class MainController extends Controller
         return view('main.medias', compact('recentPhotos'));
     }
 
-    public function tourList()
+    public function tourList(Request $request)
     {
-        $allTours = Tours::orderby('id')->paginate(20);
-        return view('main.tour_list', compact('allTours'));
+        $destination = null;
+        $allTours = [];
+
+        $destinationId = $request->get('des');
+        $motorBrand = $request->get('motor');
+        $destination = Destination::find($destinationId);
+        if (empty($destination) && empty($motorBrand)) {
+            throw new \Exception('No destination found. No Brand selected.');
+        }
+
+        $queryBuilder = DB::table('tours')
+            ->leftjoin('tour_destination', 'tours.id', '=', 'tour_destination.tours_id')
+            ->leftjoin('tour_prices', 'tours.id', '=', 'tour_prices.tours_id')
+            ->leftjoin('motorcycle', 'tour_prices.motorcycle_id', '=', 'motorcycle.id');
+        if (!empty($destination)) {
+            $queryBuilder->where('tour_destination.destination_id', '=', $destinationId);
+        } else if (!empty($motorBrand)) {
+            $queryBuilder->where('motorcycle.brand', '=', $motorBrand);
+        }
+
+        $allTours = $queryBuilder->select('tours.id', 'tours.name', 'tours.location', 'tours.photo', 'tours.description')
+            ->groupby('tours.id')
+            ->orderby('tours.id', 'desc')
+            ->paginate(1)
+            ->appends(Input::except('page'));
+
+        return view('main.tour_list', compact('allTours', 'destination'));
     }
 
     public function pageStatic(Pages $pages)
@@ -56,7 +85,7 @@ class MainController extends Controller
                     'description'  => 'required|max:500'
                 ]);
                 if ($validation->fails()) {
-                    return redirect()->to(app('url')->previous(). '#comment-message')->withErrors($validation->errors())->withInput();
+                    return redirect()->to(app('url')->previous(). '#comment-area')->withErrors($validation->errors())->withInput();
                 }
 
                 $request = $this->saveFiles($request);
@@ -74,8 +103,48 @@ class MainController extends Controller
         }
     }
 
-    public function contact()
+    public function contact(Request $request)
     {
-        return view('main.contact');
+        try {
+            $validation = Validator::make($request->all(), [
+                'name'  => 'required|max:150',
+                'email'  => 'required|email',
+                'description'  => 'required|max:500'
+            ]);
+            if ($validation->fails()) {
+                Session::flash('error', $validation->errors()->first());
+                return redirect()->to(app('url')->previous())->withInput();
+            }
+
+            $contact = Contact::create($request->all());
+
+            Session::flash('success', trans('Your request have been sent.'));
+            return redirect()->to(app('url')->previous());
+        } catch (\Exception $exception) {
+            Session::flash('error', 'Internal Error:' . $exception->getMessage());
+            return redirect()->to(app('url')->previous());
+        }
+    }
+
+    public function newsletter(Request $request)
+    {
+        try {
+            $validation = Validator::make($request->all(), [
+                'name'  => 'required|max:150',
+                'email'  => 'required|email|unique:newsletter,email'
+            ]);
+            if ($validation->fails()) {
+                Session::flash('error-newsletter', $validation->errors()->first());
+                return redirect()->to(app('url')->previous(). '#newsletter-area')->withInput();
+            }
+
+            $newsletter = Newsletter::create($request->all());
+
+            Session::flash('success-newsletter', trans('Your request have been sent.'));
+            return redirect()->to(app('url')->previous(). '#newsletter-area');
+        } catch (\Exception $exception) {
+            Session::flash('error-newsletter', 'Internal Error:' . $exception->getMessage());
+            return redirect()->to(app('url')->previous(). '#newsletter-area');
+        }
     }
 }

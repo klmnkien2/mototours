@@ -27,8 +27,12 @@
 </div><div class="form-group">
     {!! Form::label('brand', 'brand', array('class'=>'col-sm-2 control-label')) !!}
     <div class="col-sm-10">
-        {!! Form::text('brand', old('brand'), array('class'=>'form-control')) !!}
-        
+        <select name="brand" class="form-control">
+            <option value="">{{ trans('--Select one--') }}</option>
+            @foreach($motorcycleBrands as $key => $option)
+                <option value="{{ $key }}" @if($key == old('brand')) selected @endif>{{ $option }}</option>
+            @endforeach
+        </select>
     </div>
 </div><div class="form-group">
     {!! Form::label('seat_height', 'seat_height', array('class'=>'col-sm-2 control-label')) !!}

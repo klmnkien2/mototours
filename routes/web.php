@@ -21,5 +21,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/comment', 'MainController@comment')->name('main.post_comment');
     Route::get('/medias', 'MainController@medias')->name('main.medias');
     Route::view('/contact', 'main.contact')->name('main.contact');
+    Route::post('/contact/submit', 'MainController@contact')->name('main.contact_submit');
+    Route::post('/newsletter/submit', 'MainController@newsletter')->name('main.newsletter');
 });
 
