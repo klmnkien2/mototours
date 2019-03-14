@@ -102,8 +102,8 @@ class ToursController extends Controller {
                 $fields[$index] = [
                     'tours_id' => $tours->id,
                     'number' => $field,
-                    'from_date' => date('d/m/y', strtotime($request->stage_from_date[$index])),
-                    'to_date' => date('d/m/y', strtotime($request->stage_to_date[$index])),
+                    'from_date' => new \DateTime('@' . strtotime($request->stage_from_date[$index])),
+                    'to_date' => new \DateTime('@' . strtotime($request->stage_to_date[$index])),
                     'description' => $request->stage_description[$index],
                 ];
 
@@ -153,7 +153,7 @@ class ToursController extends Controller {
             'room2ride1' => 'sharing room, riding solo',
             'room1ride1' => 'single room, riding solo',
         ];
-        $isUpdate = true;
+        //$isUpdate = true;
 
         return view('admin.tours.edit', compact(
             'tours',
@@ -161,7 +161,7 @@ class ToursController extends Controller {
             'allTourItinerary',
             'allTourStages',
             'allTourPrices',
-            'isUpdate',
+            //'isUpdate',
             'motorList',
             'priceForList'
         ));

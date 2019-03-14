@@ -53,7 +53,7 @@
     </tr>
     @if(!$allTourDestination->isEmpty())
         @foreach($allTourDestination as $index => $aTourDestination)
-            @include('admin.tours.templates.tour_destination_line', ['index' => $index])
+            @include('admin.tours.templates.tour_destination_line', ['index' => $index, 'isUpdate' => true])
         @endforeach
     @else
         @include('admin.tours.templates.tour_destination_line', ['index' => ''])
@@ -158,7 +158,7 @@
     </tr>
     @if(! $allTourItinerary->isEmpty())
         @foreach($allTourItinerary as $index => $aItinerary)
-            @include('admin.tours.templates.itinerary_line', ['index' => $index])
+            @include('admin.tours.templates.itinerary_line', ['index' => $index, 'isUpdate' => true])
         @endforeach
     @else
         @include('admin.tours.templates.itinerary_line', ['index' => ''])
@@ -194,7 +194,7 @@
     </tr>
     @if(! $allTourPrices->isEmpty())
         @foreach($allTourPrices as $index => $aTourPrice)
-            @include('admin.tours.templates.tour_price_line', ['index' => $index])
+            @include('admin.tours.templates.tour_price_line', ['index' => $index, 'isUpdate' => true])
         @endforeach
     @else
         @include('admin.tours.templates.tour_price_line', ['index' => ''])
@@ -231,7 +231,7 @@
     </tr>
     @if(! $allTourStages->isEmpty())
         @foreach($allTourStages as $index => $aStage)
-            @include('admin.tours.templates.stage_line', ['index' => $index])
+            @include('admin.tours.templates.stage_line', ['index' => $index, 'isUpdate' => true])
         @endforeach
     @else
         @include('admin.tours.templates.stage_line', ['index' => ''])
