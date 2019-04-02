@@ -26,6 +26,15 @@ class AppServiceProvider extends ServiceProvider
 
         $adventureLevels = config('category.tour_adventure_level');
         View::share('adventureLevels', $adventureLevels);
+
+        $onGoingMonths = [];
+        $firstDayThisMonth = new \DateTime('first day of this month');
+        $time = $firstDayThisMonth->getTimestamp();
+        for ($i = 0; $i<=12; $i++) {
+            $onGoingMonths[] = $time;
+            $time = strtotime("+1 month", $time);
+        }
+        View::share('onGoingMonths', $onGoingMonths);
     }
 
     /**

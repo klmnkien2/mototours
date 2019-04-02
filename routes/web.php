@@ -23,5 +23,13 @@ Route::group(['middleware' => ['web']], function () {
     Route::view('/contact', 'main.contact')->name('main.contact');
     Route::post('/contact/submit', 'MainController@contact')->name('main.contact_submit');
     Route::post('/newsletter/submit', 'MainController@newsletter')->name('main.newsletter');
+    Route::post('/tour/search', 'MainController@searchTour')->name('main.search_tour');
+
+    Route::get('/setLocale/{locale}', function ($locale) {
+        if (in_array($locale, config('app.locales'))) {
+            Session::put('locale', $locale);
+        }
+        return redirect()->back();
+    })->name('web.change_language');
 });
 

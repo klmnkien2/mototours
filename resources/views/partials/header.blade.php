@@ -11,11 +11,15 @@
                     @endforeach
                 </ul>
                 <div class="chose-language">
-                    <select class="form-control languages">
-                        <option>English</option>
-                        <option>French</option>
-                        <option>German</option>
-                        <option>Spanish</option>
+                    <select id="langSelector" class="form-control languages">
+                        <option data-url="{{ route('web.change_language', ['locale' => 'en']) }}"
+                                value="en" @if(empty(Session::get('locale')) || Session::get('locale') == 'en') selected @endif>English</option>
+                        <option data-url="{{ route('web.change_language', ['locale' => 'fr']) }}"
+                                value="fr" @if(Session::get('locale') == 'fr') selected @endif>French</option>
+                        <option data-url="{{ route('web.change_language', ['locale' => 'de']) }}"
+                                value="de" @if(Session::get('locale') == 'de') selected @endif>German</option>
+                        <option data-url="{{ route('web.change_language', ['locale' => 'es']) }}"
+                                value="es" @if(Session::get('locale') == 'es') selected @endif>Spanish</option>
                     </select>
                 </div>
             </div>

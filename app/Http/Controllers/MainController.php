@@ -22,7 +22,8 @@ class MainController extends Controller
     public function home()
     {
         $recentPhotos = Media::orderby('id')->paginate(12);
-        return view('main.home', compact('recentPhotos'));
+        $recentTours = Tours::recent();
+        return view('main.home', compact('recentPhotos', 'recentTours'));
     }
 
     public function medias()
@@ -62,9 +63,49 @@ class MainController extends Controller
         return view('main.tour_list', compact('allTours', 'destination'));
     }
 
+    public function searchTour(Request $request)
+    {
+        $destination = $request->get('destination');
+        $keyword = $request->get('keyword');
+        $adventureLevel = $request->get('adventure_level');
+        $motorcycle = $request->get('motorcycle');
+        $date = $request->get('date');
+
+
+        $queryBuilder = DB::table('tours')
+            ->leftjoin('tour_destination', 'tours.id', '=', 'tour_destination.tours_id')
+            ->leftjoin('tour_prices', 'tours.id', '=', 'tour_prices.tours_id')
+            ->leftjoin('motorcycle', 'tour_prices.motorcycle_id', '=', 'motorcycle.id');
+
+        if (!empty($destination)) {
+            $queryBuilder->where('tour_destination.destination_id', '=', $destination);
+        }
+
+        if (!empty($keyword)) {
+            $queryBuilder->where('tours.name', 'LIKE', '%' . $keyword . '%');
+        }
+
+        if (!empty($adventureLevel)) {
+            $queryBuilder->where('tours.adventure_level', '=', $adventureLevel);
+        }
+
+        if (!empty($motorcycle)) {
+            $queryBuilder->where('motorcycle.brand', '=', $motorcycle);
+        }
+
+        $searchedTours = $queryBuilder->select('tours.id', 'tours.name', 'tours.location', 'tours.duration', 'tours.photo', 'tours.description')
+            ->groupby('tours.id')
+            ->orderby('tours.id', 'desc')
+            ->paginate(3)
+            ->appends(Input::except('page'));
+
+        return view('main.tour_search', compact('searchedTours'));
+    }
+
     public function pageStatic(Pages $pages)
     {
-        return view('main.page_static', compact('pages'));
+        $recentTours = Tours::recent();
+        return view('main.page_static', compact('pages', 'recentTours'));
     }
 
     public function pageDestination(Tours $tours)

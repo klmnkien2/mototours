@@ -4,42 +4,16 @@
     </div>
     <div class="block-content">
         <div class="owl-carousel recently-tours">
+            @foreach($recentTours as $aTour)
             <div class="item">
-                <figure class="figure"><a href="#"><img src="{{ asset('uploads/recently-tour-1.png') }}" alt=""></a></figure>
+                <figure class="figure">
+                    <a href="{{ route('main.page_destination', ['tours' => $aTour->id]) }}"><img src="{{ asset('uploads/' . $aTour->photo) }}" alt=""></a>
+                </figure>
                 <div class="caption">
-                    <h5 class="name"><a href="#">Grand North Vietnam Motobike Tours</a></h5>
+                    <h5 class="name"><a href="{{ route('main.page_destination', ['tours' => $aTour->id]) }}">{{ $aTour->name }}</a></h5>
                 </div>
             </div>
-            <div class="item">
-                <figure class="figure"><a href="#"><img src="{{ asset('uploads/recently-tour-2.png') }}" alt=""></a></figure>
-                <div class="caption">
-                    <h5 class="name"><a href="#">Homestay Vietnam Motobike Tours</a></h5>
-                </div>
-            </div>
-            <div class="item">
-                <figure class="figure"><a href="#"><img src="{{ asset('uploads/recently-tour-1.png') }}" alt=""></a></figure>
-                <div class="caption">
-                    <h5 class="name"><a href="#">Grand North Vietnam Motobike Tours</a></h5>
-                </div>
-            </div>
-            <div class="item">
-                <figure class="figure"><a href="#"><img src="{{ asset('uploads/recently-tour-2.png') }}" alt=""></a></figure>
-                <div class="caption">
-                    <h5 class="name"><a href="#">Homestay Vietnam Motobike Tours</a></h5>
-                </div>
-            </div>
-            <div class="item">
-                <figure class="figure"><a href="#"><img src="{{ asset('uploads/recently-tour-1.png') }}" alt=""></a></figure>
-                <div class="caption">
-                    <h5 class="name"><a href="#">Grand North Vietnam Motobike Tours</a></h5>
-                </div>
-            </div>
-            <div class="item">
-                <figure class="figure"><a href="#"><img src="{{ asset('uploads/recently-tour-2.png') }}" alt=""></a></figure>
-                <div class="caption">
-                    <h5 class="name"><a href="#">Homestay Vietnam Motobike Tours</a></h5>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </div>

@@ -267,4 +267,36 @@ jQuery(document).ready(function($) {
 			commentForm.slideUp();
 		}
 	});
+
+	// change language
+	$('#langSelector').change(function (e) {
+		$(e.currentTarget).find("option:selected").each(function() {
+			window.location.href = ($( this ).data('url'));
+		});
+	});
+
+	// Attach a submit handler to the form
+	$( "#tourfinderform" ).submit(function( event ) {
+
+		// Stop form from submitting normally
+		event.preventDefault();
+
+		// Get some values from elements on the page:
+		var $form = $( this ),
+			formdata = $form.serializeArray(),
+			url = $form.attr( "action" );
+
+		// Send the data using post
+		var posting = $.post( url, formdata );
+
+		// Put the results in a div
+		posting.done(function( resultcontent ) {
+			var desTxt = $form.find("select[name='destination'] option:selected").first().text();
+			var motorcycleTxt = $form.find("select[name='motorcycle'] option:selected").first().text();
+			var dateTxt = $form.find("select[name='date'] option:selected").first().text();
+
+			$( "#pg-resultfor" ).empty().append( desTxt + ' & ' + motorcycleTxt + ' & ' +  dateTxt);
+			$( "#pg-resultcontent" ).empty().append( resultcontent );
+		});
+	});
 });

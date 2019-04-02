@@ -138,9 +138,9 @@
                                     <td>
                                         <a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="" data-content="Seat height: {{  $aTourPrice['motor']['seat_height'] }}<br/>Weight: {{  $aTourPrice['motor']['weight'] }}<br/>Capacity: {{  $aTourPrice['motor']['capacity'] }}<br/>Performance: {{  $aTourPrice['motor']['performance'] }}<br/><img src={{  asset('uploads/' . $aTourPrice['motor']['photo']) }} />" data-original-title="{{ $aTourPrice['motor']['name'] }}">{{ $aTourPrice['motor']['name'] }}</a>
                                     </td>
-                                    <td>$ {{  $aTourPrice['room2ride2'] }}</td>
-                                    <td>$ {{  $aTourPrice['room2ride1'] }}</td>
-                                    <td>$ {{  $aTourPrice['room1ride1'] }}</td>
+                                    <td>@if(isset($aTourPrice['room2ride2'])) $ {{  $aTourPrice['room2ride2'] }} @endif</td>
+                                    <td>@if(isset($aTourPrice['room2ride1'])) $ {{  $aTourPrice['room2ride1'] }} @endif</td>
+                                    <td>@if(isset($aTourPrice['room1ride1'])) $ {{  $aTourPrice['room1ride1'] }} @endif</td>
                                 </tr>
                                 @endforeach
 

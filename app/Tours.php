@@ -72,4 +72,9 @@ class Tours extends Model {
     {
         return $this->hasMany('App\TourDestination');
     }
+
+    public static function recent()
+    {
+        return Tours::orderby('id', 'desc')->paginate(6);
+    }
 }
