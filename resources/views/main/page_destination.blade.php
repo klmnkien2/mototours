@@ -70,6 +70,10 @@
                                     <td>{{ $tours['rest_day'] }}</td>
                                 </tr>
                                 <tr>
+                                    <th scope="row">Riding Day</th>
+                                    <td>{{ $tours['riding_day'] }}</td>
+                                </tr>
+                                <tr>
                                     <th scope="row">Highlights</th>
                                     <td>{!! $tours['highlights'] !!}</td>
                                 </tr>
@@ -97,7 +101,7 @@
                                 @foreach($itinerarys as $anItinerary)
                                 <tr>
                                     <th scope="row">{{ $anItinerary['title'] }}</th>
-                                    <td>{{ $anItinerary['description'] }}</td>
+                                    <td>{!! $anItinerary['description'] !!}</td>
                                 </tr>
                                 @endforeach
                                 </tbody>

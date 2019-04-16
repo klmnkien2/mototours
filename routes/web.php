@@ -18,6 +18,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/tours', 'MainController@tourList')->name('main.tour_list');
     Route::get('/page/{pages}', 'MainController@pageStatic')->name('main.page_static');
     Route::get('/tour/{tours}', 'MainController@pageDestination')->name('main.page_destination');
+    Route::get('/tour-{slug}', 'MainController@tourDetail')->name('main.tour_detail');
     Route::post('/comment', 'MainController@comment')->name('main.post_comment');
     Route::get('/medias', 'MainController@medias')->name('main.medias');
     Route::view('/contact', 'main.contact')->name('main.contact');

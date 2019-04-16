@@ -21,9 +21,9 @@
                     @foreach($allTours as $aTour)
                     <li><div class="clearfix inner">
                             <div class="item">
-                                <figure class="figure"><a href="{{ route('main.page_destination', ['tours' => $aTour->id]) }}"><img src="uploads/recently-tour-1.png" alt=""></a></figure>
+                                <figure class="figure"><a href="@if(!empty($aTour->slug)) {{ route('main.tour_detail', ['slug' => $aTour->slug]) }} @else {{ route('main.page_destination', ['tours' => $aTour->id]) }} @endif"><img src="uploads/recently-tour-1.png" alt=""></a></figure>
                                 <div class="caption">
-                                    <h5 class="name"><a href="#">{{ $aTour->name }}</a></h5>
+                                    <h5 class="name"><a href="@if(!empty($aTour->slug)) {{ route('main.tour_detail', ['slug' => $aTour->slug]) }} @else {{ route('main.page_destination', ['tours' => $aTour->id]) }} @endif">{{ $aTour->name }}</a></h5>
                                     <div class="location">{{ $aTour->location }}</div>
                                     <div class="text">{{ str_limit(strip_tags($aTour->description), 100, '...') }}</div>
                                 </div>

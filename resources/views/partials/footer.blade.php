@@ -33,21 +33,20 @@
                 <div class="widget">
                     <h3 class="widget-title">About Us</h3>
                     <ul class="clearfix nav-links">
-                        <li><a href="#">Who we are?</a></li>
-                        <li><a href="#">Your tour guide leaders</a></li>
-                        <li><a href="#">Why travel with us</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Press</a></li>
-                        <li><a href="#">Partners</a></li>
+                        <li><a href="{{ route('main.page_static', ['pages' => 4]) }}">Who we are?</a></li>
+                        <li><a href="{{ route('main.page_static', ['pages' => 5]) }}">Your tour guide leaders</a></li>
+                        <li><a href="{{ route('main.page_static', ['pages' => 6]) }}">Why travel with us</a></li>
+                        <li><a href="{{ route('main.page_static', ['pages' => 7]) }}">Press</a></li>
+                        <li><a href="{{ route('main.page_static', ['pages' => 8]) }}">Partners</a></li>
                     </ul>
                 </div>
                 <div class="widget">
                     <h3 class="widget-title">Helpful Links</h3>
                     <ul class="clearfix nav-links">
-                        <li><a href="#">Terms &amp; Condition</a></li>
-                        <li><a href="#">Privacy</a></li>
-                        <li><a href="#">FAQs</a></li>
-                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="{{ route('main.page_static', ['pages' => 1]) }}">Terms &amp; Condition</a></li>
+                        <li><a href="{{ route('main.page_static', ['pages' => 2]) }}">Privacy</a></li>
+                        <li><a href="{{ route('main.page_static', ['pages' => 3]) }}">FAQs</a></li>
+                        <li><a href="{{ route('main.contact') }}">Contact Us</a></li>
                     </ul>
                 </div>
                 <div class="widget">
@@ -73,9 +72,9 @@
         <div class="container-fluid">
             <div class="footmenu">
                 <ul>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms &amp; Condition</a></li>
+                    <li><a href="{{ route('main.page_static', ['pages' => 1]) }}">About Us</a></li>
+                    <li><a href="{{ route('main.page_static', ['pages' => 3]) }}">Privacy Policy</a></li>
+                    <li><a href="{{ route('main.page_static', ['pages' => 2]) }}">Terms &amp; Condition</a></li>
                 </ul>
             </div>
             <div class="copyright">

@@ -7,10 +7,10 @@
             @foreach($recentTours as $aTour)
             <div class="item">
                 <figure class="figure">
-                    <a href="{{ route('main.page_destination', ['tours' => $aTour->id]) }}"><img src="{{ asset('uploads/' . $aTour->photo) }}" alt=""></a>
+                    <a href="@if(!empty($aTour->slug)) {{ route('main.tour_detail', ['slug' => $aTour->slug]) }} @else {{ route('main.page_destination', ['tours' => $aTour->id]) }} @endif"><img src="{{ asset('uploads/' . $aTour->photo) }}" alt=""></a>
                 </figure>
                 <div class="caption">
-                    <h5 class="name"><a href="{{ route('main.page_destination', ['tours' => $aTour->id]) }}">{{ $aTour->name }}</a></h5>
+                    <h5 class="name"><a href="@if(!empty($aTour->slug)) {{ route('main.tour_detail', ['slug' => $aTour->slug]) }} @else {{ route('main.page_destination', ['tours' => $aTour->id]) }} @endif">{{ $aTour->name }}</a></h5>
                 </div>
             </div>
             @endforeach

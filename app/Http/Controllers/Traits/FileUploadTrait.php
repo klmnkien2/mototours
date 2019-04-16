@@ -20,6 +20,9 @@ trait FileUploadTrait
         $newRequest = null; // Variable to hold a new request created by above array merging
         foreach ($request->all() as $key => $value) {
             if ($request->hasFile($key)) {
+				if (is_array($request->file($key))) {
+                    continue;
+                }
                 if ($request->has($key . '_w') && $request->has($key . '_h')) {
                     // Check file width
                     $filename = time() . '-' . $request->file($key)->getClientOriginalName();
@@ -56,5 +59,27 @@ trait FileUploadTrait
         }
 
         return $newRequest == null ? $request : $newRequest;
+    }
+
+    public function saveFileArray(Request $request, $inputName, $index)
+    {
+        if (!file_exists(public_path('uploads'))) {
+            mkdir(public_path('uploads'), 0777);
+            mkdir(public_path('uploads/thumb'), 0777);
+        }
+
+        if ($request->hasFile($inputName)) {
+            if (is_array($request->file($inputName))) {
+                if (isset($request->file($inputName)[$index])) {
+                    $aFile = $request->file($inputName)[$index];
+                    $filename = time() . '-' . $aFile->getClientOriginalName();
+                    $aFile->move(public_path('uploads'), $filename);
+                    // Determine which request's data to use further
+                    return $filename;
+                }
+            }
+        }
+
+        return null;
     }
 }

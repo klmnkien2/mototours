@@ -188,6 +188,7 @@ class ToursController extends Controller {
                 $fields[$index] = [
                     'tours_id' => $tours->id,
                     'title' => $field,
+                    //'photo' => $this->saveFileArray($request, 'itinerary_photo', $index),
                     'description' => $request->itinerary_description[$index],
                 ];
 

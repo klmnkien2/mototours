@@ -7,7 +7,7 @@
 <ul class="tour-results">
     @foreach($searchedTours as $aTour)
     <li class="tour">
-        <a href="{{ route('main.page_destination', ['tours' => $aTour->id]) }}">
+        <a href="@if(!empty($aTour->slug)) {{ route('main.tour_detail', ['slug' => $aTour->slug]) }} @else {{ route('main.page_destination', ['tours' => $aTour->id]) }} @endif">
             <figure class="figure"><img class="img" src="{{ asset('uploads/thumb/' . $aTour->photo) }}" alt=""></figure>
             <div class="tour-info">
                 <h5 class="tour-name">{{ $aTour->name }}</h5>

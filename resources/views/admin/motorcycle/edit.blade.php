@@ -29,8 +29,8 @@
     <div class="col-sm-10">
         <select name="brand" class="form-control">
             <option value="">{{ trans('--Select one--') }}</option>
-            @foreach($motorcycleBrands as $key => $option)
-                <option value="{{ $key }}" @if($key == old('brand', $motorcycle->brand)) selected @endif>{{ $option }}</option>
+            @foreach($motorcycleBrands as  $option)
+                <option value="{{ $option->code }}" @if($option->code == old('brand', $motorcycle->brand)) selected @endif>{{ $option->name }}</option>
             @endforeach
         </select>
         

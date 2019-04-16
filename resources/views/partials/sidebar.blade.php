@@ -31,8 +31,8 @@
                     <div class="col-xs-6">
                         <select class="form-control" name="motorcycle">
                             <option value="">Motorcycle</option>
-                            @foreach($motorcycleBrands as $key => $value)
-                            <option value="{{ $key }}">{{ $value }}</option>
+                            @foreach($motorcycleBrands as $option)
+                            <option value="{{ $option->code }}">{{ $option->name }}</option>
                             @endforeach
                         </select>
                     </div>

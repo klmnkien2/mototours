@@ -129,6 +129,12 @@ class MainController extends Controller
         $allComments = $tours->comments;
         return view('main.page_destination', compact('tours', 'stages', 'itinerarys', 'tourPrices', 'allComments'));
     }
+	
+	public function tourDetail($slug)
+    {
+		$tours = Tours::where('slug', '=', $slug)->first();
+		return $this->pageDestination($tours);
+    }
 
     public function comment(AddCommentRequest $request)
     {

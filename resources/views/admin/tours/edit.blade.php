@@ -33,6 +33,12 @@
         
     </div>
 </div><div class="form-group">
+    {!! Form::label('slug', 'Slug', array('class'=>'col-sm-2 control-label')) !!}
+    <div class="col-sm-10">
+        {!! Form::text('slug', old('slug',$tours->slug), array('class'=>'form-control')) !!}
+        
+    </div>
+</div><div class="form-group">
     {!! Form::label('photo', 'Photo', array('class'=>'col-sm-2 control-label')) !!}
     <div class="col-sm-10">
         {!! Form::file('photo') !!}
@@ -128,6 +134,12 @@
         
     </div>
 </div><div class="form-group">
+    {!! Form::label('riding_day', 'Riding day', array('class'=>'col-sm-2 control-label')) !!}
+    <div class="col-sm-10">
+        {!! Form::text('riding_day', old('riding_day',$tours->riding_day), array('class'=>'form-control')) !!}
+        
+    </div>
+</div><div class="form-group">
     {!! Form::label('highlights', 'Highlights', array('class'=>'col-sm-2 control-label')) !!}
     <div class="col-sm-10">
         {!! Form::textarea('highlights', old('highlights',$tours->highlights), array('class'=>'form-control ckeditor')) !!}
@@ -161,7 +173,7 @@
             @include('admin.tours.templates.itinerary_line', ['index' => $index, 'isUpdate' => true])
         @endforeach
     @else
-        @include('admin.tours.templates.itinerary_line', ['index' => ''])
+        @include('admin.tours.templates.itinerary_line', ['index' => '', 'firstEmpty' => true])
     @endif
     </tbody>
 </table>

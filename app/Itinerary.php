@@ -14,6 +14,7 @@ class Itinerary extends Model {
     
     protected $fillable = [
           'title',
+          'photo',
           'description',
           'tours_id'
     ];

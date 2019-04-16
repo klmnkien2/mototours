@@ -23,6 +23,7 @@ class Tours extends Model {
     
     protected $fillable = [
           'name',
+          'slug',
           'location',
           'description',
           'start_finish',
@@ -31,6 +32,7 @@ class Tours extends Model {
           'route',
           'accommodation',
           'rest_day',
+          'riding_day',
           'highlights',
           'minimum_participant',
           'itinerary',

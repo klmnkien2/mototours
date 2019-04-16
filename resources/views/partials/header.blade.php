@@ -6,8 +6,8 @@
             <div class="clearfix extend">
                 <ul class="tours-on">
                     <li>Tours on:</li>
-                    @foreach($motorcycleBrands as $key => $value)
-                    <li><a href="{{route('main.tour_list', ['motor' => $key])}}">{{ $value }}</a></li>
+                    @foreach($motorcycleBrands as $option)
+                    <li><a href="{{route('main.tour_list', ['motor' => $option->code])}}">{{ $option->name }}</a></li>
                     @endforeach
                 </ul>
                 <div class="chose-language">
@@ -33,12 +33,11 @@
                 <li>
                     <a href="#">About</a>
                     <ul>
-                        <li><a href="#"><span>Who we are?</span></a></li>
-                        <li><a href="#"><span>Your tour guide leaders</span></a></li>
-                        <li><a href="#"><span>Why travel with us</span></a></li>
-                        <li><a href="#"><span>Privacy Policy</span></a></li>
-                        <li><a href="#"><span>Press</span></a></li>
-                        <li><a href="#"><span>Partners</span></a></li>
+                        <li><a href="{{ route('main.page_static', ['pages' => 4]) }}"><span>Who we are?</span></a></li>
+                        <li><a href="{{ route('main.page_static', ['pages' => 5]) }}"><span>Your tour guide leaders</span></a></li>
+                        <li><a href="{{ route('main.page_static', ['pages' => 6]) }}"><span>Why travel with us</span></a></li>
+                        <li><a href="{{ route('main.page_static', ['pages' => 7]) }}"><span>Press</span></a></li>
+                        <li><a href="{{ route('main.page_static', ['pages' => 8]) }}"><span>Partners</span></a></li>
                     </ul>
                 </li>
                 <li>
@@ -52,10 +51,10 @@
                 <li>
                     <a href="#">Motocycle</a>
                     <ul>
-                        <li><a href="#"><span>BMW F700 GS</span></a></li>
-                        <li><a href="#"><span>ROYAL ENFIELD</span></a></li>
-                        <li><a href="#"><span>HONDA motorbike</span></a></li>
-                        <li><a href="#"><span>Motocycle for rent</span></a></li>
+                        <li><a href="{{ route('main.page_static', ['pages' => 9]) }}"><span>BMW F700 GS</span></a></li>
+                        <li><a href="{{ route('main.page_static', ['pages' => 10]) }}"><span>ROYAL ENFIELD</span></a></li>
+                        <li><a href="{{ route('main.page_static', ['pages' => 11]) }}"><span>HONDA motorbike</span></a></li>
+                        <li><a href="{{ route('main.page_static', ['pages' => 12]) }}"><span>Motocycle for rent</span></a></li>
                     </ul>
                 </li>
                 <li><a href="{{ route('main.medias') }}">Pictures</a></li>
